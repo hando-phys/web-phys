@@ -1,0 +1,247 @@
+
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>高級碼表</title>
+
+<style>
+/* ===== 背景（科技霓虹） ===== */
+body {
+    margin: 0;
+    font-family: "Segoe UI", sans-serif;
+    background: radial-gradient(circle at top, #0f2027, #0a0f1a);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    color: white;
+}
+
+/* ===== 玻璃擬態卡片 ===== */
+.container {
+    width: 90%;
+    max-width: 420px;
+    padding: 30px;
+    border-radius: 20px;
+    backdrop-filter: blur(20px);
+    background: rgba(255,255,255,0.05);
+    box-shadow: 0 0 40px rgba(0,255,255,0.15);
+    text-align: center;
+}
+
+/* 標題 */
+.title {
+    font-size: 24px;
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+    color: #00f7ff;
+}
+
+/* ===== 時間顯示 ===== */
+.time {
+    font-size: 36px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    text-shadow: 0 0 10px #00f7ff;
+}
+
+/* 毫秒 */
+.ms {
+    font-size: 20px;
+    color: #aaa;
+}
+
+/* 按鈕 */
+.buttons {
+    margin-top: 25px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+button {
+    padding: 10px 18px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    transition: 0.3s;
+}
+
+/* Start */
+#startBtn {
+    background: linear-gradient(45deg, #00f7ff, #00c6ff);
+    color: black;
+}
+
+/* Reset */
+#resetBtn {
+    background: #444;
+    color: #aaa;
+    cursor: not-allowed;
+}
+
+#resetBtn.enabled {
+    background: #ff4d6d;
+    color: white;
+    cursor: pointer;
+}
+
+/* Lap */
+#lapBtn {
+    background: #222;
+    color: #ccc;
+    cursor: not-allowed;
+}
+
+#lapBtn.enabled {
+    background: #1b9aaa;
+    cursor: pointer;
+}
+
+/* ===== Lap 列表 ===== */
+.lap-list {
+    margin-top: 20px;
+    max-height: 200px;
+    overflow-y: auto;
+    text-align: left;
+}
+
+.lap {
+    padding: 8px 10px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+}
+
+/* 手機優化 */
+@media (max-width: 500px) {
+    .time {
+        font-size: 28px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <div class="title">碼表</div>
+
+    <div class="time">
+        <span id="time">00:00:00</span>
+        <span class="ms" id="ms">.000</span>
+    </div>
+
+    <div class="buttons">
+        <button id="startBtn">開始</button>
+        <button id="lapBtn" disabled>Lap</button>
+        <button id="resetBtn" disabled>重置</button>
+    </div>
+
+    <div class="lap-list" id="laps"></div>
+</div>
+
+<script>
+let startTime = 0;
+let elapsed = 0;
+let timer = null;
+let isRunning = false;
+let lapCount = 1;
+
+const timeEl = document.getElementById("time");
+const msEl = document.getElementById("ms");
+const startBtn = document.getElementById("startBtn");
+const resetBtn = document.getElementById("resetBtn");
+const lapBtn = document.getElementById("lapBtn");
+const lapsEl = document.getElementById("laps");
+
+/* 格式時間 */
+function format(time) {
+    let h = Math.floor(time / 3600000);
+    let m = Math.floor((time % 3600000) / 60000);
+    let s = Math.floor((time % 60000) / 1000);
+    let ms = time % 1000;
+
+    return {
+        main:
+            String(h).padStart(2,'0') + ":" +
+            String(m).padStart(2,'0') + ":" +
+            String(s).padStart(2,'0'),
+        ms: "." + String(ms).padStart(3,'0')
+    };
+}
+
+/* 更新畫面 */
+function update() {
+    let t = Date.now() - startTime + elapsed;
+    let f = format(t);
+
+    timeEl.textContent = f.main;
+    msEl.textContent = f.ms;
+}
+
+/* Start / Pause */
+startBtn.onclick = () => {
+    if (!isRunning) {
+        startTime = Date.now();
+        timer = setInterval(update, 10);
+        startBtn.textContent = "暫停";
+        isRunning = true;
+
+        resetBtn.disabled = false;
+        lapBtn.disabled = false;
+        resetBtn.classList.add("enabled");
+        lapBtn.classList.add("enabled");
+
+    } else {
+        clearInterval(timer);
+        elapsed += Date.now() - startTime;
+        startBtn.textContent = "開始";
+        isRunning = false;
+    }
+};
+
+/* Reset */
+resetBtn.onclick = () => {
+    clearInterval(timer);
+    elapsed = 0;
+    startTime = 0;
+    isRunning = false;
+    lapCount = 1;
+
+    timeEl.textContent = "00:00:00";
+    msEl.textContent = ".000";
+    lapsEl.innerHTML = "";
+
+    startBtn.textContent = "開始";
+
+    resetBtn.disabled = true;
+    lapBtn.disabled = true;
+    resetBtn.classList.remove("enabled");
+    lapBtn.classList.remove("enabled");
+};
+
+/* Lap */
+lapBtn.onclick = () => {
+    let t = Date.now() - startTime + elapsed;
+    let f = format(t);
+
+    let div = document.createElement("div");
+    div.className = "lap";
+    div.innerHTML = `
+        <span>Lap ${lapCount}</span>
+        <span>${f.main}${f.ms}</span>
+    `;
+
+    lapsEl.prepend(div);
+    lapCount++;
+};
+</script>
+
+</body>
+</html>

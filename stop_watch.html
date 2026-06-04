@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>科技風碼表 - Tech Stopwatch</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@500;700&display=swap');
+
+        body {
+            background-color: #0d1117;
+            font-family: 'Rajdhani', sans-serif;
+        }
+
+        .tech-font {
+            font-family: 'Share Tech Mono', monospace;
+        }
+
+        /* 霓虹與科技感陰影 */
+        .neon-glow-cyan {
+            box-shadow: 0 0 15px rgba(6, 182, 212, 0.4), inset 0 0 15px rgba(6, 182, 212, 0.2);
+        }
+
+        .neon-glow-green {
+            box-shadow: 0 0 15px rgba(16, 185, 129, 0.4);
+        }
+
+        .neon-glow-red {
+            box-shadow: 0 0 15px rgba(239, 68, 68, 0.4);
+        }
+
+        /* 扁平化微漸層與科技切角感 */
+        .tech-border {
+            border: 1px solid rgba(6, 182, 212, 0.3);
+        }
+
+        /* 模擬玻璃霓虹效果 */
+        .glass-panel {
+            background: rgba(22, 30, 43, 0.8);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        /* 平滑旋轉動畫 */
+        .rotate-pointer {
+            transform-origin: 50% 50%;
+            transition: transform 0.05s linear;
+        }
+    </style>
+</head>
+<body class="flex flex-col items-center justify-center min-h-screen p-4 overflow-hidden text-slate-100 select-none">
+
+    <!-- 粒子/背景科技格線裝飾 -->
+    <div class="absolute inset-0 z-0 bg-[linear-gradient(to_right,#1f293710_1px,transparent_1px),linear-gradient(to_bottom,#1f293710_1px,transparent_1px)] bg-[size:4rem_4rem] pointer-events-none"></div>
+    <div class="absolute w-[500px] h-[500px] rounded-full bg-cyan-500/5 blur-[120px] top-1/4 left-1/4 pointer-events-none z-0"></div>
+    <div class="absolute w-[500px] h-[500px] rounded-full bg-blue-500/5 blur-[120px] bottom-1/4 right-1/4 pointer-events-none z-0"></div>
+
+    <!-- 主要容器 -->
+    <div class="relative z-10 flex flex-col items-center w-full max-w-md p-6 rounded-3xl glass-panel tech-border shadow-2xl">
+
+        <!-- 標題裝飾 -->
+        <div class="flex items-center justify-between w-full mb-6">
+            <div class="flex items-center space-x-2">
+                <div class="w-2.5 h-2.5 bg-cyan-500 rounded-full animate-pulse"></div>
+                <span class="text-xs tracking-widest text-cyan-400 uppercase font-semibold">System Chrono v1.0</span>
+            </div>
+            <div class="text-[10px] text-slate-500 font-mono tracking-wider">SECURE_LINK // ACTIVE</div>
+        </div>
+
+        <!-- 圓形計時器區域 (對應 Wireframe 圓形與指針) -->
+        <div class="relative flex items-center justify-center w-72 h-72 md:w-80 md:h-80 rounded-full neon-glow-cyan bg-[#0f172a] border border-cyan-500/30 mb-8 relative">
+
+            <!-- 外圈刻度/裝飾環 -->
+            <svg class="absolute w-full h-full -rotate-90 p-4" viewBox="0 0 100 100">
+                <!-- 灰色背景圓圈 -->
+                <circle cx="50" cy="50" r="44" fill="transparent" stroke="rgba(255, 255, 255, 0.03)" stroke-width="2" />
+                <!-- 動態彩色圓圈 (顯示毫秒/秒進度) -->
+                <circle id="progressCircle" cx="50" cy="50" r="44" fill="transparent" stroke="url(#cyanGradient)" stroke-width="2" stroke-dasharray="276.4" stroke-dashoffset="276.4" stroke-linecap="round" class="transition-all duration-75" />
+
+                <defs>
+                    <linearGradient id="cyanGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#06b6d4" />
+                        <stop offset="100%" stop-color="#3b82f6" />
+                    </linearGradient>
+                </defs>
+            </svg>
+
+            <!-- 指針 (對應 Wireframe 中的箭頭指針) -->
+            <div id="handContainer" class="absolute inset-0 p-8 rotate-pointer pointer-events-none" style="transform: rotate(0deg);">
+                <div class="relative w-full h-full">
+                    <!-- 指針本體 (從圓心出發指向左側，完美配合原圖箭頭方向) -->
+                    <!-- 原圖中箭頭是從左側指向圓心，這裡設計為一個精緻的科技感橫向箭頭指針 -->
+                    <div class="absolute top-1/2 left-0 right-1/2 h-[2px] bg-gradient-to-r from-cyan-400 to-cyan-500 -translate-y-1/2">
+                        <!-- 箭頭端點 (朝向中心) -->
+                        <div class="absolute right-0 top-1/2 -translate-y-1/2 w-0 h-0 border-t-[5px] border-t-transparent border-b-[5px] border-b-transparent border-r-[8px] border-r-cyan-400"></div>
+                        <!-- 外側裝飾圓點 -->
+                        <div class="absolute left-0 top-1/2 -translate-y-1/2 w-2 h-2 rounded-full bg-cyan-400 neon-glow-cyan"></div>
+                    </div>
+                    <!-- 中心點圓盤 -->
+                    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-4 h-4 rounded-full bg-[#0d1117] border border-cyan-500/80 z-20"></div>
+                </div>
+            </div>
+
+            <!-- 時間文字顯示與標籤 -->
+            <div class="flex flex-col items-center justify-center z-10 text-center pointer-events-none mt-10">
+                <!-- 數字時間顯示 -->
+                <div id="timeDisplay" class="text-4xl md:text-5xl font-bold tracking-normal text-white tech-font">
+                    00:00.<span class="text-cyan-400 text-3xl">00</span>
+                </div>
+                <!-- 輔助標記與狀態 -->
+                <div id="statusLabel" class="text-xs text-cyan-500/60 uppercase tracking-widest mt-2 font-semibold">計時器 // 準備就緒</div>
+            </div>
+        </div>
+
+        <!-- 操作按鈕區域 (對應 Wireframe 的「開始/暫停」與「重置」) -->
+        <div class="flex flex-col space-y-3 w-full">
+
+            <!-- 開始 / 暫停 按鈕 (複合功能) -->
+            <button id="startPauseBtn" class="relative group w-full py-4 rounded-xl text-lg font-bold tracking-wider uppercase transition-all duration-300 transform active:scale-[0.98] overflow-hidden bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white neon-glow-cyan shadow-lg">
+                <span class="absolute inset-0 w-full h-full bg-white/10 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></span>
+                <span class="relative flex items-center justify-center space-x-2">
+                    <i data-lucide="play" id="startBtnIcon" class="w-5 h-5"></i>
+                    <span id="startBtnText">開 始</span>
+                </span>
+            </button>
+
+            <!-- 重置按鈕 (預設 Disabled) -->
+            <button id="resetBtn" disabled class="relative group w-full py-3.5 rounded-xl text-base font-bold tracking-wider uppercase transition-all duration-300 transform active:scale-[0.98] overflow-hidden bg-slate-800/40 text-slate-500 border border-slate-700/30 cursor-not-allowed">
+                <span id="resetBgEffect" class="absolute inset-0 w-full h-full bg-red-500/10 -translate-x-full transition-transform duration-300"></span>
+                <span class="relative flex items-center justify-center space-x-2">
+                    <i data-lucide="rotate-ccw" class="w-4.5 h-4.5"></i>
+                    <span>重 置</span>
+                </span>
+            </button>
+
+        </div>
+
+        <!-- 科技裝飾 footer -->
+        <div class="flex items-center justify-between w-full mt-6 pt-4 border-t border-slate-800 text-[10px] text-slate-500 font-mono">
+            <span>SYS_OK</span>
+            <span id="lapCount">LAPS: 00</span>
+            <span>PRECISION: 10MS</span>
+        </div>
+
+    </div>
+
+    <!-- 額外擴充：單圈紀錄面板 (當有計時且暫停/重置時更添科技感，可折疊) -->
+    <div id="lapPanel" class="w-full max-w-md mt-4 p-4 rounded-2xl glass-panel tech-border max-h-40 overflow-y-auto hidden">
+        <div class="flex justify-between text-xs text-cyan-500/70 border-b border-slate-800 pb-2 mb-2 font-semibold">
+            <span>單圈數</span>
+            <span>單圈時間</span>
+            <span>累計時間</span>
+        </div>
+        <div id="lapList" class="flex flex-col space-y-1.5 text-sm font-mono text-slate-300">
+            <!-- 動態插入紀錄 -->
+        </div>
+    </div>
+
+    <!-- JavaScript 邏輯控制 -->
+    <script>
+        // 初始化 Lucide 圖標
+        lucide.createIcons();
+
+        // 獲取 DOM 元素
+        const startPauseBtn = document.getElementById('startPauseBtn');
+        const startBtnText = document.getElementById('startBtnText');
+        const startBtnIcon = document.getElementById('startBtnIcon');
+        const resetBtn = document.getElementById('resetBtn');
+        const resetBgEffect = document.getElementById('resetBgEffect');
+        const timeDisplay = document.getElementById('timeDisplay');
+        const statusLabel = document.getElementById('statusLabel');
+        const progressCircle = document.getElementById('progressCircle');
+        const handContainer = document.getElementById('handContainer');
+        const lapPanel = document.getElementById('lapPanel');
+        const lapList = document.getElementById('lapList');
+        const lapCountSpan = document.getElementById('lapCount');
+
+        // 計時器核心變數
+        let startTime = 0;
+        let elapsedTime = 0;
+        let timerInterval = null;
+        let isRunning = false;
+        let laps = [];
+
+        // 圓周率計算用於圓圈動畫 (stroke-dashoffset)
+        const circleLength = 276.4; // 2 * PI * r (r = 44)
+
+        // 格式化時間 (分:秒.毫秒)
+        function formatTime(ms) {
+            let totalSeconds = Math.floor(ms / 1000);
+            let minutes = Math.floor(totalSeconds / 60);
+            let seconds = totalSeconds % 60;
+            let milliseconds = Math.floor((ms % 1000) / 10); // 只顯示兩位數
+
+            let mm = String(minutes).padStart(2, '0');
+            let ss = String(seconds).padStart(2, '0');
+            let msStr = String(milliseconds).padStart(2, '0');
+
+            return `${mm}:${ss}.<span class="text-cyan-400 text-3xl">${msStr}</span>`;
+        }
+
+        // 更新畫面顯示
+        function updateDisplay() {
+            const now = Date.now();
+            const currentElapsed = elapsedTime + (isRunning ? (now - startTime) : 0);
+
+            // 1. 更新數字文字
+            timeDisplay.innerHTML = formatTime(currentElapsed);
+
+            // 2. 更新圓環進度條 (一分鐘為一圈 60000ms)
+            const progress = (currentElapsed % 60000) / 60000;
+            const offset = circleLength - (progress * circleLength);
+            progressCircle.style.strokeDashoffset = offset;
+
+            // 3. 更新指針角度 (360度對應 60秒，即 60000ms)
+            // 原圖指針預設在左側（180度，或稱為 9 點鐘方向），所以基準加上 180 度或使其流暢旋轉
+            const degrees = (progress * 360);
+            handContainer.style.transform = `rotate(${degrees}deg)`;
+        }
+
+        // 啟動計時
+        function startTimer() {
+            startTime = Date.now();
+            timerInterval = setInterval(() => {
+                updateDisplay();
+            }, 10); // 每 10 毫秒更新一次，確保流暢度
+
+            isRunning = true;
+            statusLabel.textContent = "計時中 // RUNNING";
+            statusLabel.classList.remove('text-cyan-500/60');
+            statusLabel.classList.add('text-emerald-400');
+
+            // UI 更新
+            startBtnText.textContent = "暫 停";
+            startPauseBtn.classList.remove('from-cyan-600', 'to-blue-600', 'neon-glow-cyan');
+            startPauseBtn.classList.add('from-amber-600', 'to-orange-600', 'neon-glow-red');
+            startBtnIcon.setAttribute('data-lucide', 'pause');
+            lucide.createIcons();
+
+            // 「重置」按鈕變成 Enabled
+            enableResetButton();
+        }
+
+        // 暫停計時
+        function pauseTimer() {
+            clearInterval(timerInterval);
+            elapsedTime += Date.now() - startTime;
+            isRunning = false;
+
+            statusLabel.textContent = "已暫停 // PAUSED";
+            statusLabel.classList.remove('text-emerald-400');
+            statusLabel.classList.add('text-amber-400');
+
+            // UI 更新為開始按鈕
+            startBtnText.textContent = "開 始";
+            startPauseBtn.classList.remove('from-amber-600', 'to-orange-600', 'neon-glow-red');
+            startPauseBtn.classList.add('from-cyan-600', 'to-blue-600', 'neon-glow-cyan');
+            startBtnIcon.setAttribute('data-lucide', 'play');
+            lucide.createIcons();
+
+            // 記錄當前單圈 (若有需要可以記錄，此處加入動態微互動)
+            addLap(elapsedTime);
+        }
+
+        // 啟用重置按鈕
+        function enableResetButton() {
+            resetBtn.disabled = false;
+            resetBtn.classList.remove('bg-slate-800/40', 'text-slate-500', 'border-slate-700/30', 'cursor-not-allowed');
+            resetBtn.classList.add('bg-slate-800', 'text-rose-400', 'border-rose-500/30', 'hover:bg-rose-950/20', 'hover:border-rose-500/60', 'cursor-pointer');
+            resetBgEffect.classList.remove('-translate-x-full');
+            resetBgEffect.classList.add('translate-x-0');
+        }
+
+        // 停用重置按鈕 (回到預設)
+        function disableResetButton() {
+            resetBtn.disabled = true;
+            resetBtn.classList.remove('bg-slate-800', 'text-rose-400', 'border-rose-500/30', 'hover:bg-rose-950/20', 'hover:border-rose-500/60', 'cursor-pointer');
+            resetBtn.classList.add('bg-slate-800/40', 'text-slate-500', 'border-slate-700/30', 'cursor-not-allowed');
+            resetBgEffect.classList.remove('translate-x-0');
+            resetBgEffect.classList.add('-translate-x-full');
+        }
+
+        // 重置計時
+        function resetTimer() {
+            clearInterval(timerInterval);
+            isRunning = false;
+            elapsedTime = 0;
+            startTime = 0;
+            laps = [];
+
+            // UI 重置
+            timeDisplay.innerHTML = `00:00.<span class="text-cyan-400 text-3xl">00</span>`;
+            progressCircle.style.strokeDashoffset = circleLength;
+            handContainer.style.transform = `rotate(0deg)`;
+
+            statusLabel.textContent = "計時器 // 準備就緒";
+            statusLabel.classList.remove('text-emerald-400', 'text-amber-400');
+            statusLabel.classList.add('text-cyan-500/60');
+
+            // 確保「開始」按鈕外觀正確
+            startBtnText.textContent = "開 始";
+            startPauseBtn.classList.remove('from-amber-600', 'to-orange-600', 'neon-glow-red');
+            startPauseBtn.classList.add('from-cyan-600', 'to-blue-600', 'neon-glow-cyan');
+            startBtnIcon.setAttribute('data-lucide', 'play');
+            lucide.createIcons();
+
+            // 「重置」按鈕變回 Disabled
+            disableResetButton();
+
+            // 隱藏單圈紀錄
+            lapPanel.classList.add('hidden');
+            lapList.innerHTML = '';
+            lapCountSpan.textContent = "LAPS: 00";
+        }
+
+        // 增加單圈紀錄邏輯 (加分項科技感功能)
+        function addLap(time) {
+            if (time === 0) return;
+            lapPanel.classList.remove('hidden');
+
+            const lapId = laps.length + 1;
+            const lapTime = laps.length === 0 ? time : time - laps[laps.length - 1].cumulativeTime;
+
+            laps.push({
+                lapId: lapId,
+                lapTime: lapTime,
+                cumulativeTime: time
+            });
+
+            lapCountSpan.textContent = `LAPS: ${String(lapId).padStart(2, '0')}`;
+
+            // 渲染列表 (最新排最前)
+            const formatShort = (ms) => {
+                let totalSeconds = Math.floor(ms / 1000);
+                let mm = String(Math.floor(totalSeconds / 60)).padStart(2, '0');
+                let ss = String(totalSeconds % 60).padStart(2, '0');
+                let msStr = String(Math.floor((ms % 1000) / 10)).padStart(2, '0');
+                return `${mm}:${ss}.${msStr}`;
+            };
+
+            const lapRow = document.createElement('div');
+            lapRow.className = "flex justify-between items-center py-1 border-b border-slate-800/50 hover:bg-slate-800/20 px-1 transition-colors";
+            lapRow.innerHTML = `
+                <span class="text-cyan-500 text-xs">#${String(lapId).padStart(2, '0')}</span>
+                <span class="text-slate-100">${formatShort(lapTime)}</span>
+                <span class="text-slate-400 text-xs">${formatShort(time)}</span>
+            `;
+
+            lapList.insertBefore(lapRow, lapList.firstChild);
+        }
+
+        // 事件監聽
+        startPauseBtn.addEventListener('click', () => {
+            if (!isRunning) {
+                startTimer();
+            } else {
+                pauseTimer();
+            }
+        });
+
+        resetBtn.addEventListener('click', () => {
+            resetTimer();
+        });
+    </script>
+</body>
+</html>
