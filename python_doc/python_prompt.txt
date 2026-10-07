@@ -1,0 +1,147 @@
+# Role
+我是一位高中教授資訊科技的老師，我在教授**Python 程式設計**課程，中等程度學生，**請依照以下學習順序**，請幫我規劃下述主題，預計要產生 40~50 張投影片
+# Task
+## Python 的基本概念
+1-1 認識程式語言
+1-1-1 何謂程式語言
+1-1-2 程式語言的分類
+1-1-3 程式語言在生活上的應用與對科技創新的影響
+1-1-4 Python 程式語言
+1-2 程式設計演算法的介紹
+1-3 Python 開發環境介紹
+1-3-1 Python 下載與安裝
+1-3-2 使用 Python 直譯器執行程式
+1-3-3 使用官方 IDLE 編輯與執行程式
+1-3-4 使用 Google Colab 線上編輯與執行 Python 程式
+1-3-5 簡單加法計算機範例
+1-3-6 說明文件資源的獲得
+1-4 物件導向程式設計的重要概念
+## 內容與範例主要請參考下列網站
+- Python 教學: https://docs.python.org/zh-tw/3/tutorial/index.html
+- 高中資訊教師黃建庭的教學網站: https://sites.google.com/view/zsgititit/home/python-cheng-shi-she-ji
+- Python 教學(學習導讀) - STEAM 教育學習網: https://steam.oxxostudio.tw/category/python/info/start.html
+- Python Tutorial: https://www.w3schools.com/python/
+## 請依據主題與上面參考資料附加經典與常用的範例
+- 請優先參考**高中資訊教師黃建庭的教學網站: https://sites.google.com/view/zsgititit/home/python-cheng-shi-she-ji**
+# Constraints
+- 投影片設計請以簡單明瞭為主，**不要複雜設計**
+- 請以純文字 markdown 格式輸出檔案，**不要用表格**
+
+# Task 2
+根據這個主題，請產生 20 題單選擇題，產生 5 題多重選擇題，每題都有 5 個選項，並附上正確參考答案!
+- 題目需要描述清楚，答案的辨識度要適當，不要有爭議題
+- 請將題目、參考答案與簡析輸出成一個檔案
+- 參考答案與簡析放在後面
+- **請先檢查有無錯誤?修正後再輸出檔案**
+# Constraints
+- 請以純文字 markdown 格式輸出 exam.md 檔案，**不要用表格**
+
+# Role
+我是一位高中教授資訊科技的老師，我在教授**Python 程式設計**課程，中等程度學生，**請依照以下學習順序**，請幫我規劃下述主題，預計要產生 30~40 張投影片
+# Task
+## Python 程式的基礎架構與語法規則
+2-1 Python 程式基礎架構
+2-2 Python 程式語法規則
+2-3 Python 的輸入與輸出
+## 內容與範例主要請參考下列網站
+- Python 教學: https://docs.python.org/zh-tw/3/tutorial/index.html
+- 高中資訊教師黃建庭的教學網站: https://sites.google.com/view/zsgititit/home/python-cheng-shi-she-ji
+- Python 教學(學習導讀) - STEAM 教育學習網: https://steam.oxxostudio.tw/category/python/info/start.html
+- Python Tutorial: https://www.w3schools.com/python/
+## 請依據主題與上面參考資料附加經典與常用的範例
+- 請優先參考**高中資訊教師黃建庭的教學網站: https://sites.google.com/view/zsgititit/home/python-cheng-shi-she-ji**
+# Constraints
+- 投影片設計請以簡單明瞭為主，**不要複雜設計**
+- 請以純文字 markdown 格式輸出檔案，**不要用表格**
+
+# Role
+我是一位高中教授資訊科技的老師，我在教授**Python 程式設計**課程，中等程度學生，**請依照以下學習順序**，請幫我規劃下述主題，預計要產生 40~50 張投影片
+# Task
+## 變數、資料型別與運算子
+3-1 變數
+3-1-1 變數的運作原理
+3-1-2 變數的命名規則
+3-2 資料型別
+3-3 運算子
+3-3-1 指定運算子
+3-3-2 算術運算子
+3-3-3 擴展型指定運算子
+3-3-4 比較運算子
+3-3-5 邏輯運算子
+3-3-6 in 與 is 運算子
+3-3-7 位元運算子
+3-3-8 運算子優先權次序
+3-4 字串
+3-4-1 字串運算子
+3-5 變數、資料型別與運算子範例
+## 內容與範例主要請參考下列網站
+- Python 教學: https://docs.python.org/zh-tw/3/tutorial/index.html
+- 高中資訊教師黃建庭的教學網站: https://sites.google.com/view/zsgititit/home/python-cheng-shi-she-ji
+- Python 教學(學習導讀) - STEAM 教育學習網: https://steam.oxxostudio.tw/category/python/info/start.html
+- Python Tutorial: https://www.w3schools.com/python/
+## 請依據主題與上面參考資料附加經典與常用的範例
+- 請優先參考**高中資訊教師黃建庭的教學網站: https://sites.google.com/view/zsgititit/home/python-cheng-shi-she-ji**
+# Constraints
+- 投影片設計請以簡單明瞭為主，**不要複雜設計**
+- 請以純文字 markdown 格式輸出檔案，**不要用表格**
+
+# Role
+我是一位高中教授資訊科技的老師，我在教授**Python 程式設計**課程，中等程度學生，**請依照以下學習順序**，請幫我規劃下述主題，預計要產生 40~50 張投影片
+# Task
+## 選擇結構
+4-1 結構化程式設計概念
+4-2 單向選擇結構
+4-3 雙向選擇結構
+4-4 多向選擇結構
+4-5 巢狀選擇結構
+## 內容與範例主要請參考下列網站
+- Python 教學: https://docs.python.org/zh-tw/3/tutorial/index.html
+- 高中資訊教師黃建庭的教學網站: https://sites.google.com/view/zsgititit/home/python-cheng-shi-she-ji
+- Python 教學(學習導讀) - STEAM 教育學習網: https://steam.oxxostudio.tw/category/python/info/start.html
+- Python Tutorial: https://www.w3schools.com/python/
+## 請依據主題與上面參考資料附加經典與常用的範例
+- 請優先參考**高中資訊教師黃建庭的教學網站: https://sites.google.com/view/zsgititit/home/python-cheng-shi-she-ji**
+# Constraints
+- 投影片設計請以簡單明瞭為主，**不要複雜設計**
+- 請以純文字 markdown 格式輸出檔案，**不要用表格**
+- 後面的建議事項，**不要輸出到檔案**
+
+# Role
+我是一位高中教授資訊科技的老師，我在教授**Python 程式設計**課程，中等程度學生，**請依照以下學習順序**，請幫我規劃下述主題，預計要產生 40~50 張投影片
+# Task
+## 迴圈結構 ( 一 )
+5-1 迴圈的基本架構與概念
+5-2 計數迴圈結構 — 使用 for
+5-3 條件迴圈結構 — 使用 while
+## 內容與範例主要請參考下列網站
+- Python 教學: https://docs.python.org/zh-tw/3/tutorial/index.html
+- 高中資訊教師黃建庭的教學網站: https://sites.google.com/view/zsgititit/home/python-cheng-shi-she-ji
+- Python 教學(學習導讀) - STEAM 教育學習網: https://steam.oxxostudio.tw/category/python/info/start.html
+- Python Tutorial: https://www.w3schools.com/python/
+## 請依據主題與上面參考資料附加經典與常用的範例
+- 請優先參考**高中資訊教師黃建庭的教學網站: https://sites.google.com/view/zsgititit/home/python-cheng-shi-she-ji**
+# Constraints
+- 投影片設計請以簡單明瞭為主，**不要複雜設計**
+- 請以純文字 markdown 格式輸出檔案，**不要用表格**
+
+# Role
+我是一位高中教授資訊科技的老師，我在教授**Python 程式設計**課程，中等程度學生，請幫我規劃下述主題，預計要產生 20~25 張投影片
+# Task
+##**mermaid**流程圖語法介紹
+## 設計15個程式設計流程圖範例
+
+- 一般日常生活概念流程圖，**需要用到判斷與迴圈**
+- 簡單數學計算及判斷流程:example 1+2+...+100， 判斷奇偶(odd or even)數
+- 判斷最大公因數(GCD)，最小公倍數(LCM)，質數閏年（Leap Year）
+- 其他進階的典型範例
+
+## 請依據主題與參考資料附加經典與常用的範例
+
+- 請優先參考網站: **https://mermaid.ai/open-source/syntax/flowchart.html**
+- 參考網站: https://hackmd.io/@docs/mermaid_graphTD
+
+# Constraints
+
+- 投影片設計請以簡單明瞭為主，**不要複雜設計**
+- 請以純文字**mermaid**語法輸出流程圖範例
+- 請以純文字 markdown 格式輸出檔案
